@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using FluentValidation.AspNetCore;
+using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
 using Reactivities.Application.Core;
@@ -8,7 +10,7 @@ namespace Reactivities.Api.Extensions
 {
     public static class ApplicationServiceExtensions
     {
-        public static IServiceCollection AddAplicationServices(this IServiceCollection services, 
+        public static IServiceCollection AddAplicationServices(this IServiceCollection services,
             IConfiguration config)
         {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -31,6 +33,8 @@ namespace Reactivities.Api.Extensions
 
             services.AddMediatR(typeof(List.Handler));
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>();
 
             return services;
         }

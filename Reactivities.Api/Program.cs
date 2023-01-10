@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Reactivities.Api.Extensions;
+using Reactivities.Api.Middleware;
 using Reactivities.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddAplicationServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
