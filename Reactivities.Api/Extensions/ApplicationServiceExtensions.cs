@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Reactivities.Application.Activities;
 using Reactivities.Application.Core;
 using Reactivities.Persistence;
+using Reactivities.Application.Interfaces;
+using Reactivities.Infrastructure.Security;
 
 namespace Reactivities.Api.Extensions
 {
@@ -35,6 +37,8 @@ namespace Reactivities.Api.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddHttpContextAccessor();
+            services.AddScoped<IUserAccessor, UserAccessor>();
 
             return services;
         }
