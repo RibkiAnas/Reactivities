@@ -7,6 +7,7 @@ using Reactivities.Application.Core;
 using Reactivities.Persistence;
 using Reactivities.Application.Interfaces;
 using Reactivities.Infrastructure.Security;
+using Reactivities.Infrastructure.Photos;
 
 namespace Reactivities.Api.Extensions
 {
@@ -39,6 +40,8 @@ namespace Reactivities.Api.Extensions
             services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
 
             return services;
         }
